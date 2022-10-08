@@ -1,0 +1,33 @@
+version: '3'
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - ./public:/swirlfeed/public
+        depends_on:
+            - mysql
+        restart: always
+    php:
+        build:
+            context: .
+            dockerfile: PHP.Dockerfile
+        volumes:
+            - ./public:/swirlfeed/public
+        restart: always
+    mysql:
+        image: mariadb:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: 'password'
+            MYSQL_USER: 'andrew'
+            MYSQL_PASSWORD: 'password'
+            MYSQL_DATABASE: 'swirlfeed'
+        volumes:
+            - swirlfeed:/var/lib/mysql
+        ports:
+            - 3306:3306
+        restart: always
+volumes:
+    swirlfeed: {}
