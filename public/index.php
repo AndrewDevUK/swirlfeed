@@ -1,14 +1,5 @@
 <?php
-$server = 'mysql';
-$db = 'swirlfeed';
-$username = 'andrew';
-$password = 'password';
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-$pdo = new PDO("mysql:dbname=$db;host=$server", $username, $password, $options);
+require("config/config.php");
 ?>
 
 <!DOCTYPE html>
