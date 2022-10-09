@@ -15,7 +15,7 @@ if(isset($_POST['login_button'])){
             $_SESSION['username'] = $username;
 
             // Reactivate account if closed.
-            $user_check = pdo($pdo, "SELECT * FROM users WHERE email='$email' AND user_closed='yes'")->fetch();
+            $user_check = pdo($pdo, "SELECT * FROM users WHERE email='$email' AND user_closed='yes'")->fetchAll();
 
             if(count($user_check) > 0){
                 $arguments = [
