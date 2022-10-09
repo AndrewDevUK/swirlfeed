@@ -15,4 +15,14 @@ $options = [
 
 $pdo = new PDO("mysql:dbname=$db;host=$server", $db_username, $db_password, $options);
 
+// Function to simplify database calls.
+function pdo(PDO $pdo, string $sql, array $arguments = null){
+    if(!$arguments){
+        return $pdo->query($sql);
+    }
+    $statement = $pdo->prepare($sql);
+    $statement->execute($arguments);
+    return $statement;
+}
+
 ?>

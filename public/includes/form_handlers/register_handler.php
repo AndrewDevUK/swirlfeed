@@ -47,8 +47,7 @@ if(isset($_POST['register_button'])){
             $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
             // Check if email exits.
-            $statement = $pdo->query("SELECT email FROM users WHERE email='$email'");
-            $email_check = $statement->fetchAll();
+            $email_check = pdo($pdo, "SELECT email FROM users WHERE email='$email'")->fetchAll();
 
             // Counts num rows returned.
             $num_rows = count($email_check);
@@ -89,8 +88,7 @@ if(isset($_POST['register_button'])){
         // Generate username.
         $username = strtolower($fname . "_" . $lname);
 
-        $statement = $pdo->query("SELECT username FROM users WHERE username='$username'");
-        $username_check = $statement->fetchAll();
+        $username_check = pdo($pdo, "SELECT username FROM users WHERE username='$username'")->fetchAll();
 
         $i = 0;
         $temp_username = $username;
@@ -98,8 +96,7 @@ if(isset($_POST['register_button'])){
             $i++;
             $temp_username = $username . "_" . $i;
 
-            $statement = $pdo->query("SELECT username FROM users WHERE username='$temp_username'");
-            $username_check = $statement->fetchAll();
+            $username_check = pdo($pdo, "SELECT username FROM users WHERE username='$temp_username'")->fetchAll();
         }
         $username = $temp_username;
 
@@ -213,8 +210,7 @@ if(isset($_POST['register_button'])){
             'friend_array' => ','];
 
 
-        $statement = $pdo->prepare($sql);
-        $statement->execute($new_user);
+        pdo($pdo, $sql, $new_user);
 
         array_push($error_array, "<span style='color: #14C800'>You're all set! Go ahead and login!</span><br>");
 
