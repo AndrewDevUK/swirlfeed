@@ -18,7 +18,7 @@ require("includes/form_handlers/login_handler.php");
 </head>
 <body>
 
-    <?php 
+    <?php
     
     if(isset($_POST['register_button'])){
         echo '
